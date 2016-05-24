@@ -4,7 +4,7 @@
   "description": "Example app, migration to redux",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "rimraf public && webpack-dev-server --content-base public --colors --port 8081 --open --inline --hot",
   },
   "repository": {
     "type": "git",
