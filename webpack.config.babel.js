@@ -34,6 +34,10 @@ module.exports = {
 	},
 	devtool: 'source-map',
 	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery/src/jquery',
+			jQuery: 'jquery/src/jquery',
+		}),
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
 		new HtmlWebpackPlugin({ template: 'index.template.html', inject: 'body' }),
 	],
