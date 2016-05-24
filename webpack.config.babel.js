@@ -30,6 +30,10 @@ module.exports = {
 				test: /\.css/,
 				loader: 'style!css',
 			},
+			{
+				test: /\.(eot|svg|ttf|woff|woff2)$/,
+				loader: 'file'
+			}
 		],
 	},
 	devtool: 'source-map',
