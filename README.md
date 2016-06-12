@@ -1,4 +1,4 @@
-# Twitter MemeLocator
+# Meme filter
 ## Example app
 Webapp serving for showing migration from React model interconnections to Redux.
  
@@ -7,5 +7,5 @@ Webapp serving for showing migration from React model interconnections to Redux.
 
 ##  Start
 1. Run `npm i`
-2. Run `npm run server`
+2. Run `npm run watch`
 3. Open [http://localhost:8081/](http://localhost:8081/)

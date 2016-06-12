@@ -1,18 +1,40 @@
 import 'materialize-css/bin/materialize.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router'
 
-const App = () => (
+import Menu from './common/menu/component';
+import HomePage from './page/home/component';
+import FiltersPage from './page/filters/component';
+
+const App = (props) => (
 	<div className="container">
 		<div className="row">
 			<div className="col s12">
-				<h2>Twitter MemeLocator</h2>
+				<h2>Meme filter</h2>
 			</div>
 		</div>
+		<div className="row">
+			<div className="col s12">
+				<Menu />
+			</div>
+		</div>
+		{props.children}
 	</div>
 );
 
+const AppRouter = () => (
+	<Router history={browserHistory}>
+		<Route path="/" component={App}>
+			<Route path="home" component={HomePage}/>
+			<Route path="filters" component={FiltersPage} />
+			<Route path="*" component={() => <div>Page not found</div>}/>
+		</Route>
+	</Router>
+);
+
 ReactDOM.render(
-	<App />,
+	<AppRouter />,
 	document.getElementById('#react-app')
 );
