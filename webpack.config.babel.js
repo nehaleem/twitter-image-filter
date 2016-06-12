@@ -15,6 +15,12 @@ module.exports = {
 		path: path.resolve(__dirname, 'public'),
 		filename: 'app.bundle.js',
 	},
+	node: {
+		console: true,
+		fs: 'empty',
+		net: 'empty',
+		tls: 'empty'
+	},
 	resolve: {
 		root: path.resolve(__dirname, 'src'),
 		extensions: [ '', '.js' ],
@@ -32,8 +38,12 @@ module.exports = {
 			},
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)$/,
-				loader: 'file'
-			}
+				loader: 'file',
+			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader',
+			},
 		],
 	},
 	devtool: 'source-map',
