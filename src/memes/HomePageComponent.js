@@ -99,7 +99,7 @@ export default class HomePage extends React.Component {
 					<div className="col s3">
 						<strong>Filters</strong>
 						<FilterList
-							onFilterAdd={this._handleFilterAdd}
+							onFilterItemClick={this._handleFilterAdd}
 							items={unappliedFilters}
 						/>
 					</div>

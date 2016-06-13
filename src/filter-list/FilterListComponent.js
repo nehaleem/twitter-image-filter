@@ -6,18 +6,18 @@ export default class FilterListComponent extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this._handleFilterAdd = this._handleFilterAdd.bind(this);
+		this._handleFilterItemClick = this._handleFilterItemClick.bind(this);
 	}
 
 	static propTypes = {
 		items: React.PropTypes.array.isRequired,
-		onFilterAdd: React.PropTypes.func.isRequired,
+		onFilterItemClick: React.PropTypes.func.isRequired,
 	};
 
-	_handleFilterAdd (event) {
+	_handleFilterItemClick (event) {
 		const itemId = Number.parseInt(event.target.getAttribute('data-filter-id'), 10);
 
-		this.props.onFilterAdd(itemId);
+		this.props.onFilterItemClick(itemId);
 	}
 
 	render () {
@@ -28,7 +28,7 @@ export default class FilterListComponent extends React.Component {
 					data-filter-id={item.id}
 					className="chip filter-list__filter"
 					title="Add to search"
-					onClick={this._handleFilterAdd}
+					onClick={this._handleFilterItemClick}
 				>
 					{item.name}
 				</div>
