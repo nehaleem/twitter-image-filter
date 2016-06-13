@@ -1,7 +1,8 @@
 import React from 'react';
 
 import MemeList from '../meme-list/MemeListComponent';
-import LoaderBar from '../loader-bar/LoaderBar';
+import LoaderBar from '../loader-bar/LoaderBarComponent';
+import FilterList from '../filter-list/FilterListComponent';
 import * as memeService from './service';
 
 export default class HomePage extends React.Component {
@@ -11,6 +12,9 @@ export default class HomePage extends React.Component {
 		this.state = {
 			items: [],
 			fetching: true,
+			filters: [
+				{ id: 1, name: 'laughing fucks', used: false },
+			],
 		};
 	}
 
@@ -31,11 +35,15 @@ export default class HomePage extends React.Component {
 				<div className="row">
 					<div className="col s12">
 						<div>Home</div>
-						{
-							this.state.fetching ?
-								<LoaderBar /> :
-								<MemeList items={this.state.items} />
-						}
+					</div>
+				</div>
+				<div className="row">
+					<div className="col s3">
+						<strong>Filters</strong>
+						<FilterList items={this.state.filters} />
+					</div>
+					<div className="col s9">
+						<strong>Filtered memes</strong>
 					</div>
 				</div>
 			</div>

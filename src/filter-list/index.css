@@ -1,0 +1,16 @@
+.filter-list {
+	margin-top: 10px;
+	border: 1px solid #929292;
+	border-radius: 2px;
+	padding: 10px;
+	width: 100%;
+}
+
+	.filter-list__filter {
+		width: 100%;
+	}
+
+	.filter-list__filter:hover {
+		background-color: #c0c0c0;
+		cursor: pointer;
+	}
