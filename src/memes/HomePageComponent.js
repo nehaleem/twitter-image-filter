@@ -14,9 +14,12 @@ export default class HomePage extends React.Component {
 			items: [],
 			fetching: true,
 			filters: [
-				{ id: 1, name: 'laughing fucks', used: false },
+				{ id: 1, name: 'laughing fucks', applied: false },
 			],
 		};
+
+		this._handleFilterRemove = this._handleFilterRemove.bind(this);
+		this._handleFilterAdd = this._handleFilterAdd.bind(this);
 	}
 
 	componentDidMount () {
@@ -30,7 +33,50 @@ export default class HomePage extends React.Component {
 			});
 	}
 
+	_handleFilterRemove (itemId) {
+		const items = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
+
+		this.setState({ items });
+	}
+
+	_handleFilterAdd (itemId) {
+		const items = this._applyFilterInFiltersById(itemId, this.state.filters);
+
+		this.setState({ items });
+	}
+
+	_applyFilterInFiltersById (itemId, filters) {
+		return filters.map((filter) => {
+			if (filter.id === itemId) {
+				filter.applied = true;
+			}
+
+			return filter;
+		});
+	}
+
+	_cancelAppliedFilterFromFiltersById (itemId, filters) {
+		return filters.map((filter) => {
+			if (filter.id === itemId) {
+				filter.applied = false;
+			}
+
+			return filter;
+		});
+	}
+
+	_filterAppliedFilters (filters) {
+		return filters.filter((filter) => filter.applied);
+	}
+
+	_filterOutAppliedFilters (filters) {
+		return filters.filter((filter) => !filter.applied);
+	}
+
 	render () {
+		const appliedFilters = this._filterAppliedFilters(this.state.filters);
+		const unappliedFilters = this._filterOutAppliedFilters(this.state.filters);
+
 		return (
 			<div>
 				<div className="row">
@@ -38,17 +84,26 @@ export default class HomePage extends React.Component {
 						<div>Home</div>
 					</div>
 				</div>
+
 				<div className="row">
 					<div className="col s12">
 						<strong>Search filters</strong>
-						<AppliedFilterList items={this.state.filters} />
+						<AppliedFilterList
+							onFilterRemove={this._handleFilterRemove}
+							items={appliedFilters}
+						/>
 					</div>
 				</div>
+
 				<div className="row">
 					<div className="col s3">
 						<strong>Filters</strong>
-						<FilterList items={this.state.filters} />
+						<FilterList
+							onFilterAdd={this._handleFilterAdd}
+							items={unappliedFilters}
+						/>
 					</div>
+
 					<div className="col s9">
 						<strong>Filtered memes</strong>
 						<div className="items-block meme-list">
@@ -60,6 +115,7 @@ export default class HomePage extends React.Component {
 						</div>
 					</div>
 				</div>
+
 			</div>
 		);
 	}
