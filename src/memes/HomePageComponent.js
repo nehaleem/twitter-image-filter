@@ -44,7 +44,7 @@ export default class HomePage extends React.Component {
 					</div>
 					<div className="col s9">
 						<strong>Filtered memes</strong>
-						<div className="items-block">
+						<div className="items-block meme-list">
 							{
 								this.state.fetching ?
 									<LoaderBar /> :
