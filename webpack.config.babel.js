@@ -7,7 +7,7 @@ const dependencies = require(path.resolve(__dirname, 'package.json')).dependenci
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
 	entry: {
-		app: [ 'app.js', 'service/memes/data.json' ],
+		app: [ 'app.js', 'memes/data.json' ],
 		vendor: Object.keys(dependencies),
 	},
 	debug: true,

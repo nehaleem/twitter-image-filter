@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MemeList from '../../components/MemeList';
-import LoaderBar from '../../components/LoaderBar';
-import * as memeService from '../../service/memes/service';
+import MemeList from '../meme-list/MemeListComponent';
+import LoaderBar from '../loader-bar/LoaderBar';
+import * as memeService from './service';
 
 export default class HomePage extends React.Component {
 	constructor (props) {

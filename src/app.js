@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 
-import Menu from './common/menu/component';
-import HomePage from './page/home/component';
-import FiltersPage from './page/filters/component';
+import Menu from './menu/MenuComponent';
+import HomePage from './memes/HomePageComponent';
+import FiltersPage from './filters/FiltersPageComponent';
 
 const App = (props) => (
 	<div className="container">
