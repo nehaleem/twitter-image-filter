@@ -7,7 +7,7 @@ const dependencies = require(path.resolve(__dirname, 'package.json')).dependenci
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
 	entry: {
-		app: 'app.js',
+		app: [ 'app.js', 'service/memes/data.json' ],
 		vendor: Object.keys(dependencies),
 	},
 	debug: true,
@@ -19,7 +19,7 @@ module.exports = {
 		console: true,
 		fs: 'empty',
 		net: 'empty',
-		tls: 'empty'
+		tls: 'empty',
 	},
 	resolve: {
 		root: path.resolve(__dirname, 'src'),
@@ -42,9 +42,12 @@ module.exports = {
 			},
 			{
 				test: /\.json$/,
-				loader: 'json-loader',
+				loader: 'file?name=[name].[ext]',
 			},
 		],
+	},
+	devServer: {
+		historyApiFallback: true,
 	},
 	devtool: 'source-map',
 	plugins: [
