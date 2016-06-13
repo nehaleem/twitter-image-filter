@@ -1,6 +1,7 @@
 .filter-list {
 	margin-top: 10px;
 	width: 100%;
+	min-height: 54px;
 }
 
 	.filter-list__filter {

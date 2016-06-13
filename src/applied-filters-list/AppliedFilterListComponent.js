@@ -37,9 +37,11 @@ export default class AppliedFilterListComponent extends React.Component {
 	}
 
 	render () {
+		const filters = this._renderFilters(this.props.items);
+
 		return (
 			<div className="applied-filter-list items-block">
-				{this._renderFilters(this.props.items)}
+				{ filters.length ? filters : 'No filters used' }
 			</div>
 		);
 	}

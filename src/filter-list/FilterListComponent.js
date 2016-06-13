@@ -37,7 +37,11 @@ export default class FilterListComponent extends React.Component {
 
 		return (
 			<div className="filter-list items-block">
-				{filters}
+				{
+					filters.length ?
+						filters :
+						'No filters to add'
+				}
 			</div>
 		);
 	}
