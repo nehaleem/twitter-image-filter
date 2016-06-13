@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "tags": [ "wat", "fat", "woman" ],
+    "url": "http://memesvault.com/wp-content/uploads/Wat-Meme-Tumblr-12.jpg"
+  },
+  {
+    "id": 2,
+    "tags": [ "oplease", "man", "laugh" ],
+    "url": "https://imgflip.com/s/meme/Yao-Ming.jpg"
+  },
+  {
+    "id": 3,
+    "tags": [ "notbad", "obama", "man" ],
+    "url": "http://i0.kym-cdn.com/photos/images/facebook/000/138/246/tumblr_lltzgnHi5F1qzib3wo1_400.jpg"
+  },
+  {
+    "id": 4,
+    "tags": [ "hmm", "man", "think" ],
+    "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSnlpYaddl8DAv5ycyU8FjGfAR3j2v-1Cjr164vnIb0FviQcbrNRQ"
+  },
+  {
+    "id": 5,
+    "tags": [ "please", "man" ],
+    "url": "http://memecreator.cz/media/templates/250/pleaseguy.jpg"
+  }
+]
