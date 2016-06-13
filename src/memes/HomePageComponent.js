@@ -34,15 +34,15 @@ export default class HomePage extends React.Component {
 	}
 
 	_handleFilterRemove (itemId) {
-		const items = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
+		const filters = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
 
-		this.setState({ items });
+		this.setState({ filters });
 	}
 
 	_handleFilterAdd (itemId) {
-		const items = this._applyFilterInFiltersById(itemId, this.state.filters);
+		const filters = this._applyFilterInFiltersById(itemId, this.state.filters);
 
-		this.setState({ items });
+		this.setState({ filters });
 	}
 
 	_applyFilterInFiltersById (itemId, filters) {
