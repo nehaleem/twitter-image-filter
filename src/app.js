@@ -2,7 +2,7 @@ import 'materialize-css/bin/materialize.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router';
 
 import Menu from './common/menu/component';
 import HomePage from './page/home/component';
