@@ -16,7 +16,7 @@ export default function FilterListComponent (props) {
 	});
 
 	return (
-		<div className="filter-list">
+		<div className="filter-list items-block">
 			{filters}
 		</div>
 	);
