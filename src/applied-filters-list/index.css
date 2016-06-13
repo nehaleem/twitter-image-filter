@@ -1,0 +1,14 @@
+.applied-filter-list {
+	margin-top: 10px;
+	width: 100%;
+}
+
+	.applied-filter-list__filter {
+		display: inline-block;
+		margin-right: 10px;
+	}
+
+	.applied-filter-list__filter:hover {
+		background-color: #c0c0c0;
+		cursor: pointer;
+	}

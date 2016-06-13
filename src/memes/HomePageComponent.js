@@ -3,6 +3,7 @@ import React from 'react';
 import MemeList from '../meme-list/MemeListComponent';
 import LoaderBar from '../loader-bar/LoaderBarComponent';
 import FilterList from '../filter-list/FilterListComponent';
+import AppliedFilterList from '../applied-filters-list/AppliedFilterListComponent';
 import * as memeService from './service';
 
 export default class HomePage extends React.Component {
@@ -35,6 +36,12 @@ export default class HomePage extends React.Component {
 				<div className="row">
 					<div className="col s12">
 						<div>Home</div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col s12">
+						<strong>Search filters</strong>
+						<AppliedFilterList items={this.state.filters} />
 					</div>
 				</div>
 				<div className="row">
