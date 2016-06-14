@@ -65,14 +65,21 @@ export default class FilterForm extends React.Component {
 
 		if (this.state.id !== null) {
 			additionalControlls = [
-				<a className="waves-effect waves-light btn"	onClick={this._handleFilterDelete}>
+				<button className="waves-effect waves-light btn" onClick={this._handleFilterDelete}>
 					Delete
-				</a>,
-				<a className="waves-effect waves-light btn"	onClick={this._handleFormErase}>
+				</button>,
+				<button className="waves-effect waves-light btn" onClick={this._handleFormErase}>
 					New filter
-				</a>,
+				</button>,
 			];
 		}
+
+		let saveBtnClassName = 'waves-effect waves-light btn';
+
+		if (!this.state.name.length) {
+			saveBtnClassName += ' disabled';
+		}
+
 
 		return (
 			<div>
@@ -96,9 +103,13 @@ export default class FilterForm extends React.Component {
 
 				<div className="row">
 					<div className="col s12 form-controls">
-						<a className="waves-effect waves-light btn" onClick={this._handleFilterSave}>
+						<button
+							className={saveBtnClassName}
+							onClick={this._handleFilterSave}
+							disabled={!this.state.name.length}
+						>
 							Save
-						</a>
+						</button>
 						{additionalControlls}
 					</div>
 				</div>
