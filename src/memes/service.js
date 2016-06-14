@@ -6,7 +6,7 @@ function wait (ms = 200) {
 	});
 }
 export function search (keywords) {
-	const query = window.encodeURIComponent(`meme ${keywords.join(' ')} filter:media`);
+	const query = window.encodeURIComponent(`meme ${keywords.join(' ')} filter:media lang:en`);
 
 	return window
 		.fetch(`${DATA_URL}?q=${query}`)

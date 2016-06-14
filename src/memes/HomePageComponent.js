@@ -13,7 +13,7 @@ export default class HomePage extends React.Component {
 
 		this.state = {
 			items: [],
-			fetching: true,
+			fetching: false,
 			filters: filterService.list(),
 		};
 
@@ -21,9 +21,16 @@ export default class HomePage extends React.Component {
 		this._handleFilterAdd = this._handleFilterAdd.bind(this);
 	}
 
-	componentDidMount () {
+	_consolidateTagsFromFilters (filters) {
+		const tags = filters
+			.reduce((map, filter) => map.concat(filter.tags), []);
+
+		return [ ...new Set(tags) ];
+	}
+
+	_fetchTweetsByTags (tags) {
 		twitter
-			.search([ 'laugh' ])
+			.search(tags)
 			.then((items) => {
 				this.setState({ items, fetching: false });
 			});
@@ -31,14 +38,37 @@ export default class HomePage extends React.Component {
 
 	_handleFilterRemove (itemId) {
 		const filters = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
+		const appliedFilters = this._filterAppliedFilters(filters);
 
-		this.setState({ filters });
+		this.setState({
+			filters,
+			fetching: appliedFilters.length > 0,
+		});
+
+		if (appliedFilters.length > 0) {
+			const tags = this._consolidateTagsFromFilters(appliedFilters);
+
+			this._fetchTweetsByTags(tags);
+		}
+		else {
+			this.setState({ items: [] });
+		}
 	}
 
 	_handleFilterAdd (itemId) {
 		const filters = this._applyFilterInFiltersById(itemId, this.state.filters);
+		const appliedFilters = this._filterAppliedFilters(filters);
 
-		this.setState({ filters });
+		this.setState({
+			filters,
+			fetching: appliedFilters.length > 0,
+		});
+
+		if (appliedFilters.length > 0) {
+			const tags = this._consolidateTagsFromFilters(appliedFilters);
+
+			this._fetchTweetsByTags(tags);
+		}
 	}
 
 	_applyFilterInFiltersById (itemId, filters) {
@@ -67,6 +97,18 @@ export default class HomePage extends React.Component {
 
 	_filterOutAppliedFilters (filters) {
 		return filters.filter((filter) => !filter.applied);
+	}
+
+	_getItemsContent () {
+		if (this.state.fetching) {
+			return <LoaderBar />;
+		}
+		else if (this.state.items.length) {
+			return <MemeList items={this.state.items} />;
+		}
+		else {
+			return 'No tweets found, or no filter defined. Jeesus :(';
+		}
 	}
 
 	render () {
@@ -103,11 +145,7 @@ export default class HomePage extends React.Component {
 					<div className="col s9">
 						<strong>Filtered memes</strong>
 						<div className="items-block meme-list">
-							{
-								this.state.fetching ?
-									<LoaderBar /> :
-									<MemeList items={this.state.items} />
-							}
+							{this._getItemsContent()}
 						</div>
 					</div>
 				</div>

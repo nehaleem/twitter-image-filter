@@ -10,6 +10,7 @@ export default class FilterForm extends React.Component {
 		this._handleFilterDelete = this._handleFilterDelete.bind(this);
 		this._handleNameInputChange = this._handleNameInputChange.bind(this);
 		this._handleFormErase = this._handleFormErase.bind(this);
+		this._handleTagsInputChange = this._handleTagsInputChange.bind(this);
 
 		this._nameNode = null;
 
@@ -52,6 +53,12 @@ export default class FilterForm extends React.Component {
 		const name = event.target.value;
 
 		this.setState({ name });
+	}
+
+	_handleTagsInputChange (event) {
+		const tags = event.target.value.split(',');
+
+		this.setState({ tags });
 	}
 
 	_handleFormErase () {
@@ -99,8 +106,14 @@ export default class FilterForm extends React.Component {
 				</div>
 
 				<div className="row">
-					<div className="input-field col s12">
-						Tags
+					<div className="input-field col s5">
+						<input
+							id="filter_tags"
+							type="text"
+							value={this.state.tags.join(',')}
+							onChange={this._handleTagsInputChange}
+						/>
+						<label for="filter_tags">Tags (comma separated "deep,shit")</label>
 					</div>
 				</div>
 
