@@ -11,6 +11,8 @@ export default class FilterForm extends React.Component {
 		this._handleNameInputChange = this._handleNameInputChange.bind(this);
 		this._handleFormErase = this._handleFormErase.bind(this);
 
+		this._nameNode = null;
+
 		this.state = {
 			id: null,
 			name: '',
@@ -29,6 +31,7 @@ export default class FilterForm extends React.Component {
 			const { id, name, tags } = nextProps.filter;
 
 			this.setState({ id, name, tags });
+			this._nameNode.focus();
 		}
 		else {
 			this._handleFormErase();
@@ -87,6 +90,7 @@ export default class FilterForm extends React.Component {
 						<input
 							id="filter_name"
 							type="text"
+							ref={(node) => this._nameNode = node}
 							value={this.state.name}
 							onChange={this._handleNameInputChange}
 						/>
