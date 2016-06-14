@@ -12,21 +12,59 @@ export default class FiltersPage extends React.Component {
 			editedFilter: null,
 		};
 
-		this._editFilter = this._editFilter.bind(this);
+		this._handleUpdateFilter = this._handleUpdateFilter.bind(this);
 		this._deleteFilter = this._deleteFilter.bind(this);
-		this._saveFilter = this._saveFilter.bind(this);
-	}
-
-	_editFilter (itemId) {
-
+		this._handleFilterClick = this._handleFilterClick.bind(this);
 	}
 
 	_deleteFilter (itemId) {
 
 	}
 
-	_saveFilter (itemId, tags) {
+	_handleUpdateFilter (itemId, name, tags) {
+		if (itemId === null) {
+			this._addFilter(name, tags);
+		}
+		else {
+			this._editFilter(itemId, name, tags);
+		}
+	}
 
+	_handleFilterClick (itemId) {
+		const filter = this.state.filters
+			.find((filter) => filter.id === itemId);
+
+		this.setState({ editedFilter: filter });
+	}
+
+	_editFilter (itemId, name, tags) {
+		const updatedFilter = {
+			id: itemId,
+			name,
+			tags,
+		};
+		const filters = this.state.filters
+			.map((filter) => {
+				if (filter.id === itemId) {
+					filter = updatedFilter;
+				}
+
+				return filter;
+			});
+
+		this.setState({ filters, editedFilter: updatedFilter });
+	}
+
+	_addFilter (name, tags) {
+		const filter = {
+			id: this.state.filters.length,
+			name,
+			tags,
+		};
+
+		const filters = this.state.filters.concat([ filter ]);
+
+		this.setState({ filters, editedFilter: filter });
 	}
 
 	render () {
@@ -42,7 +80,7 @@ export default class FiltersPage extends React.Component {
 					<div className="col s3">
 						<strong>Your filters</strong>
 						<FilterList
-							onFilterItemClick={this._editFilter}
+							onFilterItemClick={this._handleFilterClick}
 							items={this.state.filters}
 						/>
 					</div>
@@ -53,7 +91,7 @@ export default class FiltersPage extends React.Component {
 							<FilterForm
 								filter={this.state.editedFilter}
 								onDelete={this._deleteFilter}
-								onSave={this._saveFilter}
+								onSave={this._handleUpdateFilter}
 							/>
 						</div>
 					</div>
