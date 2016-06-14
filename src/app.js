@@ -26,15 +26,19 @@ const App = (props) => (
 	</div>
 );
 
-const AppRouter = () => (
-	<Router history={browserHistory}>
-		<Route path="/" component={App}>
-			<Route path="home" component={HomePage}/>
-			<Route path="filters" component={FiltersPage} />
-			<Route path="*" component={() => <div>Page not found</div>}/>
-		</Route>
-	</Router>
-);
+class AppRouter extends React.Component {
+	render () {
+		return (
+			<Router history={browserHistory}>
+				<Route path="/" component={App}>
+					<Route path="home" component={HomePage}/>
+					<Route path="filters" component={FiltersPage} />
+					<Route path="*" component={() => <div>Page not found</div>}/>
+				</Route>
+			</Router>
+		);
+	}
+}
 
 ReactDOM.render(
 	<AppRouter />,

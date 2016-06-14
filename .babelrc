@@ -1,4 +1,13 @@
 {
   "presets": [ "es2015", "stage-0", "react" ],
-  "plugins": [ "transform-runtime" ]
+  "plugins": [
+    [ "react-transform", {
+      "transforms": [{
+        "transform": "react-transform-hmr",
+        "imports": ["react"],
+        "locals": ["module"]
+      }]
+    }],
+    "transform-runtime"
+  ]
 }

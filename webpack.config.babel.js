@@ -7,13 +7,17 @@ const dependencies = require(path.resolve(__dirname, 'package.json')).dependenci
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
 	entry: {
-		app: [ 'app.js', 'memes/data.json' ],
+		app: [
+			'webpack-hot-middleware/client?reload=true',
+			'app.js',
+		],
 		vendor: Object.keys(dependencies),
 	},
 	debug: true,
 	output: {
-		path: path.resolve(__dirname, 'public'),
+		path: path.resolve(__dirname, 'dist'),
 		filename: 'app.bundle.js',
+		publicPath: '/',
 	},
 	node: {
 		console: true,
@@ -30,7 +34,12 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loaders: [ 'babel' ],
+				loader: 'react-hot',
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel',
 			},
 			{
 				test: /\.css/,
@@ -46,9 +55,6 @@ module.exports = {
 			},
 		],
 	},
-	devServer: {
-		historyApiFallback: true,
-	},
 	devtool: 'source-map',
 	plugins: [
 		new webpack.ProvidePlugin({
@@ -56,6 +62,7 @@ module.exports = {
 			jQuery: 'jquery/src/jquery',
 		}),
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({ template: 'index.template.html', inject: 'body' }),
 	],
 };
