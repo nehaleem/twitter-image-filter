@@ -27,6 +27,30 @@ const webpackMiddleware = webpackDevMiddleware(compiler, {
 
 app.use(webpackMiddleware);
 app.use(webpackHotMiddleware(compiler));
+
+const Twitter = require('twitter');
+const client = new Twitter({
+	consumer_key: process.env.CONSUMER_KEY,
+	consumer_secret: process.env.CONSUMER_SECRET,
+	bearer_token: process.env.BEARER_TOKEN,
+});
+
+app.get('/api/twitter/search/tweets.json', (req, res) => {
+	client.get('search/tweets', { q: req.query.q }, (error, tweets, response) => {
+		if (error) {
+			res
+				.status(500)
+				.json({
+					error,
+					message: 'Twitter API responded with error',
+				});
+		}
+		else {
+			res.json(tweets);
+		}
+	});
+});
+
 app.get('*', (req, res) => {
 	res.write(webpackMiddleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
 	res.end();

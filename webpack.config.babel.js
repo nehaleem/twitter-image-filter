@@ -11,7 +11,7 @@ module.exports = {
 			'webpack-hot-middleware/client?reload=true',
 			'app.js',
 		],
-		vendor: Object.keys(dependencies),
+		vendor: Object.keys(dependencies).filter((dep) => dep !== 'twitter'), // Dont want nodejs module inside bundle
 	},
 	debug: true,
 	output: {

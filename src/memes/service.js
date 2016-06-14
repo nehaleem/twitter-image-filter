@@ -1,13 +1,17 @@
-const DATA_URL = '/data.json';
+const DATA_URL = '/api/twitter/search/tweets.json';
 
 function wait (ms = 200) {
 	return new Promise((resolve) => {
 		setTimeout(resolve, ms);
 	});
 }
+export function search () {
+	const query = window.encodeURIComponent('cat filter:media');
 
-export function list () {
-	return wait(1000)
-		.then(() => window.fetch(DATA_URL))
-		.then((result) => result.json());
+	return window
+		.fetch(`${DATA_URL}?q=${query}`)
+		.then((result) => result.json())
+		.catch((error) => {
+			console.error(error);
+		});
 }
