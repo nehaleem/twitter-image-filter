@@ -1,5 +1,6 @@
 import React from 'react';
 
+import * as filterService from '../filters/service';
 import FilterForm from '../filter-form/FilterFormComponent';
 import FilterList from '../filter-list/FilterListComponent';
 
@@ -8,7 +9,7 @@ export default class FiltersPage extends React.Component {
 		super(props);
 
 		this.state = {
-			filters: [],
+			filters: filterService.list(),
 			editedFilter: null,
 		};
 
@@ -24,6 +25,7 @@ export default class FiltersPage extends React.Component {
 		filters.splice(filterIndex, 1);
 
 		this.setState({ filters, editedFilter: null });
+		filterService.save(filters);
 	}
 
 	_handleUpdateFilter (itemId, name, tags) {
@@ -58,6 +60,7 @@ export default class FiltersPage extends React.Component {
 			});
 
 		this.setState({ filters, editedFilter: updatedFilter });
+		filterService.save(filters);
 	}
 
 	_addFilter (name, tags) {
@@ -70,6 +73,7 @@ export default class FiltersPage extends React.Component {
 		const filters = this.state.filters.concat([ filter ]);
 
 		this.setState({ filters, editedFilter: filter });
+		filterService.save(filters);
 	}
 
 	render () {

@@ -5,6 +5,7 @@ import LoaderBar from '../loader-bar/LoaderBarComponent';
 import FilterList from '../filter-list/FilterListComponent';
 import AppliedFilterList from '../applied-filters-list/AppliedFilterListComponent';
 import * as memeService from './service';
+import * as filterService from '../filters/service';
 
 export default class HomePage extends React.Component {
 	constructor (props) {
@@ -13,9 +14,7 @@ export default class HomePage extends React.Component {
 		this.state = {
 			items: [],
 			fetching: true,
-			filters: [
-				{ id: 1, name: 'laughing fucks', applied: false },
-			],
+			filters: filterService.list(),
 		};
 
 		this._handleFilterRemove = this._handleFilterRemove.bind(this);
