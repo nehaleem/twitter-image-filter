@@ -9,14 +9,14 @@ export default function MemeList (props) {
 				<div className="meme-list__meme">
 					<div className="meme__inner-column">
 						<img
-							width="100"
-							height="100"
+							width="150"
+							height="150"
 							src={item.url}
 						/>
 					</div>
 					<div className="meme__inner-column">
-						<strong className="title">Tags:</strong>
-						<p>{item.tags.join(', ')}</p>
+						<strong className="title">Text:</strong>
+						<p>{item.text}</p>
 					</div>
 				</div>
 			</li>

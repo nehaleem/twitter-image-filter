@@ -5,6 +5,7 @@ import LoaderBar from '../loader-bar/LoaderBarComponent';
 import FilterList from '../filter-list/FilterListComponent';
 import AppliedFilterList from '../applied-filters-list/AppliedFilterListComponent';
 import * as filterService from '../filters/service';
+import * as twitter from '../memes/service';
 
 export default class HomePage extends React.Component {
 	constructor (props) {
@@ -18,6 +19,14 @@ export default class HomePage extends React.Component {
 
 		this._handleFilterRemove = this._handleFilterRemove.bind(this);
 		this._handleFilterAdd = this._handleFilterAdd.bind(this);
+	}
+
+	componentDidMount () {
+		twitter
+			.search([ 'laugh' ])
+			.then((items) => {
+				this.setState({ items, fetching: false });
+			});
 	}
 
 	_handleFilterRemove (itemId) {
