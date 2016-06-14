@@ -31,6 +31,9 @@ export default class FilterForm extends React.Component {
 
 			this.setState({ id, name, tags });
 		}
+		else {
+			this._handleFormErase();
+		}
 	}
 
 	_handleFilterSave () {
@@ -40,7 +43,7 @@ export default class FilterForm extends React.Component {
 	}
 
 	_handleFilterDelete () {
-		// Not implemented
+		this.props.onDelete(this.state.id);
 	}
 
 	_handleNameInputChange (event) {

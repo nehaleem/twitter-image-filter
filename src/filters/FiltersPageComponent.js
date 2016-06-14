@@ -18,7 +18,12 @@ export default class FiltersPage extends React.Component {
 	}
 
 	_deleteFilter (itemId) {
+		const filters = this.state.filters.slice();
+		const filterIndex = filters.findIndex((filter) => filter.id === itemId);
 
+		filters.splice(filterIndex, 1);
+
+		this.setState({ filters, editedFilter: null });
 	}
 
 	_handleUpdateFilter (itemId, name, tags) {
