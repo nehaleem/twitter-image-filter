@@ -7,14 +7,14 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 
 import Menu from './menu/MenuComponent';
-import HomePage from './memes/HomePageComponent';
+import HomePage from './images/HomePageComponent';
 import FiltersPage from './filters/FiltersPageComponent';
 
 const App = (props) => (
 	<div className="container">
 		<div className="row">
 			<div className="col s12">
-				<h2>Meme filter</h2>
+				<h2>Image filter</h2>
 			</div>
 		</div>
 		<div className="row">

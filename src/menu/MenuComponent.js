@@ -9,7 +9,7 @@ export default class Menu extends React.Component {
 				<div class="nav-wrapper">
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li>
-							<Link to="/home">Memes</Link>
+							<Link to="/home">Images</Link>
 						</li>
 						<li>
 							<Link to="/filters">Filters</Link>

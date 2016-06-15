@@ -1,8 +1,8 @@
-.meme-list {
+.image-list {
 	margin-top: 10px;
 }
 
-	.meme-list__meme {
+	.image-list__image {
 		display: -ms-flexbox;
 		display: -webkit-flex;
 		display: flex;
@@ -20,7 +20,7 @@
 		align-content: stretch;
 	}
 
-		.meme__inner-column {
+		.image__inner-column {
 			-webkit-order: 0;
 			-ms-flex-order: 0;
 			order: 0;
@@ -31,7 +31,11 @@
 			-ms-flex-item-align: auto;
 			align-self: auto;
 		}
-		
+
+		.image-description {
+			padding-left: 15px;
+		}
+
 		.circle-border {
 			border-radius: 75px;
 			border: 4px solid #d0d0d0;

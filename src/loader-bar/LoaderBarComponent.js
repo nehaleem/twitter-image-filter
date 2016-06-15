@@ -7,7 +7,7 @@ export default function LoaderBar () {
 			<div className="progress">
 				<div className="indeterminate"></div>
 			</div>
-			<strong>Fetching memes dude, chill out ...</strong>
+			<strong>Fetching tweets dude, chill out ...</strong>
 		</div>
 	);
 };

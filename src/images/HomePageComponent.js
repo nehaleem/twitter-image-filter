@@ -1,11 +1,11 @@
 import React from 'react';
 
-import MemeList from '../meme-list/MemeListComponent';
+import ImageList from '../image-list/ImageListComponent';
 import LoaderBar from '../loader-bar/LoaderBarComponent';
 import FilterList from '../filter-list/FilterListComponent';
 import AppliedFilterList from '../applied-filters-list/AppliedFilterListComponent';
 import * as filterService from '../filters/service';
-import * as twitter from '../memes/service';
+import * as imageService from '../images/service';
 
 export default class HomePage extends React.Component {
 	constructor (props) {
@@ -29,7 +29,7 @@ export default class HomePage extends React.Component {
 	}
 
 	_fetchTweetsByTags (tags) {
-		twitter
+		imageService
 			.search(tags)
 			.then((items) => {
 				this.setState({ items, fetching: false });
@@ -104,7 +104,7 @@ export default class HomePage extends React.Component {
 			return <LoaderBar />;
 		}
 		else if (this.state.items.length) {
-			return <MemeList items={this.state.items} />;
+			return <ImageList items={this.state.items} />;
 		}
 		else {
 			return 'No tweets found, or no filter defined. Jeesus :(';
@@ -143,8 +143,8 @@ export default class HomePage extends React.Component {
 					</div>
 
 					<div className="col s9">
-						<strong>Filtered memes</strong>
-						<div className="items-block meme-list">
+						<strong>Found image tweets</strong>
+						<div className="items-block image-list">
 							{this._getItemsContent()}
 						</div>
 					</div>
