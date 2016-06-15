@@ -19,8 +19,8 @@ These filters can be used for searching in twitter images feed.
 
 ## Info
 This repo contains 2 branches:
-1. master - State without Redux
-2. redux  - Same app migrated to redux // TODO
+* `master` - State without Redux
+* `redux`  - Same app migrated to redux `//TODO`
 
 ##  Start
     $ npm run watch
