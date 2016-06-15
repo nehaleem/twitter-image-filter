@@ -1,16 +1,21 @@
 # Twitter image filter
 ## Description
 Purpose of this app is pure demonstration of migration from just React to React+Redux.
+You can create filters containing tags. These filters are saved inside localStorage. 
+These filters can be used for searching in twitter images feed.
 
 ## Stack
-react,react-router,webpack,express (for HMR)
+- react
+- react-router
+- webpack
+- nodeJS
+- babel (ES6)
+- express (for HMR)
  
 ##  Prerequisites
-1.
-	$ npm i -g rimraf eslint babel-eslint eslint-plugin-react
-2. 
-	$ npm i
-3. Set your env variables inside TWITTER_API.env for twitter fetching.
+    $ npm i -g rimraf eslint babel-eslint eslint-plugin-react
+    $ npm i
+ Set your env variables inside TWITTER_API.env for twitter fetching.
 
 ## Info
 This repo contains 2 branches:
@@ -18,5 +23,5 @@ This repo contains 2 branches:
 2. redux  - Same app migrated to redux // TODO
 
 ##  Start
-1. Run `npm run watch`
-2. Open [http://localhost:8081/](http://localhost:8081/)
+    $ npm run watch
+Open [http://localhost:8081/](http://localhost:8081/)
