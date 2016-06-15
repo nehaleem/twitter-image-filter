@@ -1,5 +1,5 @@
 {
-  "name": "meme-filter-redux-example",
+  "name": "twitter-image-filter",
   "version": "0.0.1",
   "description": "Example app, migration to redux",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nehaleem/meme-filter-redux-example.git"
+    "url": "git+https://github.com/nehaleem/twitter-image-filter.git"
   },
   "keywords": [
     "react",
@@ -20,9 +20,9 @@
   "author": "Jan Dolezal",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nehaleem/meme-filter-redux-example/issues"
+    "url": "https://github.com/nehaleem/twitter-image-filter/issues"
   },
-  "homepage": "https://github.com/nehaleem/meme-filter-redux-example#readme",
+  "homepage": "https://github.com/nehaleem/twitter-image-filter#readme",
   "dependencies": {
     "jquery": "^2.2.4",
     "materialize-css": "^0.97.6",
