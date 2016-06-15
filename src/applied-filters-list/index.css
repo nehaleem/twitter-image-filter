@@ -1,16 +1,17 @@
 .applied-filter-list {
-	height: 52px;
 	margin-top: 10px;
 	line-height: 31px;
 	width: 100%;
 }
 
 	.applied-filter-list__filter {
+		background-color: #ee6e73;
+		color: white;
 		display: inline-block;
 		margin-right: 10px;
 	}
 
 	.applied-filter-list__filter:hover {
-		background-color: #c0c0c0;
+		background-color: #bf3137;
 		cursor: pointer;
 	}

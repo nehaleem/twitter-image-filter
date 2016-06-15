@@ -119,13 +119,13 @@ export default class HomePage extends React.Component {
 			<div>
 				<div className="row">
 					<div className="col s12">
-						<div>Home</div>
+						<h3>Home</h3>
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col s12">
-						<strong>Search filters</strong>
+						<h4>Search filters</h4>
 						<AppliedFilterList
 							onFilterRemove={this._handleFilterRemove}
 							items={appliedFilters}
@@ -135,7 +135,7 @@ export default class HomePage extends React.Component {
 
 				<div className="row">
 					<div className="col s3">
-						<strong>Filters</strong>
+						<h4>Filters</h4>
 						<FilterList
 							onFilterItemClick={this._handleFilterAdd}
 							items={unappliedFilters}
@@ -143,7 +143,7 @@ export default class HomePage extends React.Component {
 					</div>
 
 					<div className="col s9">
-						<strong>Found image tweets</strong>
+						<h4>Found image tweets</h4>
 						<div className="items-block image-list">
 							{this._getItemsContent()}
 						</div>

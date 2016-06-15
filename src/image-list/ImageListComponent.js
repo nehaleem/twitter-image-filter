@@ -5,7 +5,7 @@ import './index.css';
 export default function ImageList (props) {
 	const images = props.items.map((item) => {
 		return (
-			<li key={item.id} className="collection-item">
+			<li key={item.id} className="collection-item collection-item--my">
 				<div className="image-list__image">
 					<div className="image__inner-column">
 						<a href={item.url} target="_blank">
@@ -27,7 +27,7 @@ export default function ImageList (props) {
 	});
 
 	return (
-		<ul className="collection">
+		<ul className="collection collection--my">
 			{images}
 		</ul>
 	);

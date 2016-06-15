@@ -14,7 +14,7 @@ const App = (props) => (
 	<div className="container">
 		<div className="row">
 			<div className="col s12">
-				<h2>Image filter</h2>
+				<h2>Twitter image filter</h2>
 			</div>
 		</div>
 		<div className="row">

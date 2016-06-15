@@ -63,9 +63,30 @@ export default class FiltersPage extends React.Component {
 		filterService.save(filters);
 	}
 
+	_sortFilterById (filterA, filterB) {
+		if (filterA.id < filterB.id) {
+			return -1;
+		}
+		else if (filterA.id > filterB.id) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
 	_addFilter (name, tags) {
+		let lastFilterIndex = 0;
+
+		if (this.state.filters.length) {
+			const sortedFilters = this.state.filters.sort((this._sortFilterById));
+			const lastFilter = sortedFilters[sortedFilters.length - 1];
+
+			lastFilterIndex = lastFilter.id + 1;
+		}
+
 		const filter = {
-			id: this.state.filters.length,
+			id: lastFilterIndex,
 			name,
 			tags,
 		};
@@ -81,13 +102,13 @@ export default class FiltersPage extends React.Component {
 			<div>
 				<div className="row">
 					<div className="col s12">
-						<div>Filters</div>
+						<h3>Filters</h3>
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col s3">
-						<strong>Your filters</strong>
+						<h4>Your filters</h4>
 						<FilterList
 							onFilterItemClick={this._handleFilterClick}
 							items={this.state.filters}
@@ -95,7 +116,7 @@ export default class FiltersPage extends React.Component {
 					</div>
 
 					<div className="col s9">
-						<strong>Filter edit</strong>
+						<h4>Filter edit</h4>
 						<div className="items-block filter-form">
 							<FilterForm
 								filter={this.state.editedFilter}

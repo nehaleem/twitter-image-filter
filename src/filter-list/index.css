@@ -7,9 +7,11 @@
 	.filter-list__filter {
 		width: 100%;
 		margin-bottom: 5px;
+		background-color: #ee6e73;
+		color: white;
 	}
 
 	.filter-list__filter:hover {
-		background-color: #c0c0c0;
+		background-color: #bf3137;
 		cursor: pointer;
 	}
