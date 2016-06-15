@@ -8,11 +8,14 @@ export default function MemeList (props) {
 			<li key={item.id} className="collection-item avatar">
 				<div className="meme-list__meme">
 					<div className="meme__inner-column">
-						<img
-							width="150"
-							height="150"
-							src={item.url}
-						/>
+						<a href={item.url} target="_blank">
+							<img
+								className="circle-border"
+								width="150"
+								height="150"
+								src={item.url}
+							/>
+						</a>
 					</div>
 					<div className="meme__inner-column">
 						<strong className="title">Text:</strong>

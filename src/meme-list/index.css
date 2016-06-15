@@ -31,3 +31,8 @@
 			-ms-flex-item-align: auto;
 			align-self: auto;
 		}
+		
+		.circle-border {
+			border-radius: 75px;
+			border: 4px solid #d0d0d0;
+		}

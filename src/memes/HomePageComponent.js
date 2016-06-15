@@ -135,7 +135,7 @@ export default class HomePage extends React.Component {
 
 				<div className="row">
 					<div className="col s3">
-						<strong>Filters 3</strong>
+						<strong>Filters</strong>
 						<FilterList
 							onFilterItemClick={this._handleFilterAdd}
 							items={unappliedFilters}
