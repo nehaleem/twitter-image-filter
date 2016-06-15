@@ -113,7 +113,12 @@ export default class FilterForm extends React.Component {
 							value={this.state.tags.join(',')}
 							onChange={this._handleTagsInputChange}
 						/>
-						<label for="filter_tags">Tags (comma separated "deep,shit")</label>
+						<label
+							for="filter_tags"
+							className={ this.state.tags.length ? 'active' : '' }
+						>
+							Tags (comma separated "deep,shit")
+						</label>
 					</div>
 				</div>
 
