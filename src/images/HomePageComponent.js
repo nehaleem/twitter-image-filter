@@ -5,115 +5,45 @@ import ImageList from '../image-list/ImageListComponent';
 import LoaderBar from '../loader-bar/LoaderBarComponent';
 import FilterList from '../filter-list/FilterListComponent';
 import AppliedFilterList from '../applied-filters-list/AppliedFilterListComponent';
-import * as filterService from '../filters/service';
-import * as imageService from '../images/service';
 
 export default class HomePage extends React.Component {
-	constructor (props) {
-		super(props);
-
-		this.state = {
-			items: [],
-			fetching: false,
-			filters: filterService.list(),
-		};
-	}
-
-	_consolidateTagsFromFilters (filters) {
-		const tags = filters
-			.reduce((map, filter) => map.concat(filter.tags), []);
-
-		return [ ...new Set(tags) ];
-	}
-
-	_fetchTweetsByTags (tags) {
-		imageService
-			.search(tags)
-			.then((items) => {
-				this.setState({ items, fetching: false });
-			});
-	}
-
-	@autobind
-	_handleFilterRemove (itemId) {
-		const filters = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
-		const appliedFilters = this._filterAppliedFilters(filters);
-
-		this.setState({
-			filters,
-			fetching: appliedFilters.length > 0,
-		});
-
-		if (appliedFilters.length > 0) {
-			const tags = this._consolidateTagsFromFilters(appliedFilters);
-
-			this._fetchTweetsByTags(tags);
-		}
-		else {
-			this.setState({ items: [] });
-		}
-	}
-
-	@autobind
-	_handleFilterAdd (itemId) {
-		const filters = this._applyFilterInFiltersById(itemId, this.state.filters);
-		const appliedFilters = this._filterAppliedFilters(filters);
-
-		this.setState({
-			filters,
-			fetching: appliedFilters.length > 0,
-		});
-
-		if (appliedFilters.length > 0) {
-			const tags = this._consolidateTagsFromFilters(appliedFilters);
-
-			this._fetchTweetsByTags(tags);
-		}
-	}
-
-	_applyFilterInFiltersById (itemId, filters) {
-		return filters.map((filter) => {
-			if (filter.id === itemId) {
-				filter.applied = true;
-			}
-
-			return filter;
-		});
-	}
-
-	_cancelAppliedFilterFromFiltersById (itemId, filters) {
-		return filters.map((filter) => {
-			if (filter.id === itemId) {
-				filter.applied = false;
-			}
-
-			return filter;
-		});
-	}
-
-	_filterAppliedFilters (filters) {
-		return filters.filter((filter) => filter.applied);
-	}
-
-	_filterOutAppliedFilters (filters) {
-		return filters.filter((filter) => !filter.applied);
+	componentWillMount () {
+		this.props.listFilters();
 	}
 
 	_getItemsContent () {
-		if (this.state.fetching) {
+		if (this.props.fetching) {
 			return <LoaderBar />;
 		}
-		else if (this.state.items.length) {
-			return <ImageList items={this.state.items} />;
+		else if (this.props.items.length) {
+			return <ImageList items={this.props.items} />;
 		}
 		else {
 			return 'No tweets found, or no filter defined. Jeesus :(';
 		}
 	}
 
+	_groupFiltersByAppliedState (filters) {
+		return filters
+			.reduce(
+				(filtersByGroup, filter) => {
+					if (filter.applied) {
+						filtersByGroup.applied.push(filter);
+					}
+					else {
+						filtersByGroup.unApplied.push(filter);
+					}
+
+					return filtersByGroup;
+				}, {
+					applied: [],
+					unApplied: [],
+				}
+			);
+	}
+
 	render () {
-		const appliedFilters = this._filterAppliedFilters(this.state.filters);
-		const unappliedFilters = this._filterOutAppliedFilters(this.state.filters);
+		const filtersByGroup = this._groupFiltersByAppliedState(this.props.filters);
 
 		return (
 			<div>
@@ -127,8 +57,8 @@ export default class HomePage extends React.Component {
 					<div className="col s12">
 						<h4>Search filters</h4>
 						<AppliedFilterList
-							onFilterRemove={this._handleFilterRemove}
-							items={appliedFilters}
+							onFilterRemove={this.props.removeFilter}
+							items={filtersByGroup.applied}
 						/>
 					</div>
 				</div>
@@ -137,8 +67,8 @@ export default class HomePage extends React.Component {
 					<div className="col s3">
 						<h4>Filters</h4>
 						<FilterList
-							onFilterItemClick={this._handleFilterAdd}
-							items={unappliedFilters}
+							onFilterItemClick={this.props.addFilter}
+							items={filtersByGroup.unApplied}
 						/>
 					</div>
 
