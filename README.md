@@ -15,7 +15,7 @@ These filters can be used for searching in twitter images feed.
 ##  Prerequisites
     $ npm i -g rimraf eslint babel-eslint eslint-plugin-react
     $ npm i
- Set your env variables inside TWITTER_API.env for twitter fetching.
+ Set your env variables inside .env for twitter fetching.
 
 ## Info
 This repo contains 2 branches:
