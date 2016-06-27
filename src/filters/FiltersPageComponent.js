@@ -1,4 +1,5 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import * as filterService from '../filters/service';
 import FilterForm from '../filter-form/FilterFormComponent';
@@ -12,12 +13,9 @@ export default class FiltersPage extends React.Component {
 			filters: filterService.list(),
 			editedFilter: null,
 		};
-
-		this._handleUpdateFilter = this._handleUpdateFilter.bind(this);
-		this._deleteFilter = this._deleteFilter.bind(this);
-		this._handleFilterClick = this._handleFilterClick.bind(this);
 	}
 
+	@autobind
 	_deleteFilter (itemId) {
 		const filters = this.state.filters.slice();
 		const filterIndex = filters.findIndex((filter) => filter.id === itemId);
@@ -28,6 +26,7 @@ export default class FiltersPage extends React.Component {
 		filterService.save(filters);
 	}
 
+	@autobind
 	_handleUpdateFilter (itemId, name, tags) {
 		if (itemId === null) {
 			this._addFilter(name, tags);
@@ -37,6 +36,7 @@ export default class FiltersPage extends React.Component {
 		}
 	}
 
+	@autobind
 	_handleFilterClick (itemId) {
 		const filter = this.state.filters
 			.find((filter) => filter.id === itemId);

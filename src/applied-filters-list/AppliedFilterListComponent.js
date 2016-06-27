@@ -1,12 +1,11 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import './index.css';
 
 export default class AppliedFilterListComponent extends React.Component {
 	constructor (props) {
 		super(props);
-
-		this._handleFilterRemove = this._handleFilterRemove.bind(this);
 	}
 
 	static propTypes = {
@@ -14,6 +13,7 @@ export default class AppliedFilterListComponent extends React.Component {
 		onFilterRemove: React.PropTypes.func.isRequired,
 	};
 
+	@autobind
 	_handleFilterRemove (event) {
 		const itemId = Number.parseInt(event.target.getAttribute('data-filter-id'), 10);
 

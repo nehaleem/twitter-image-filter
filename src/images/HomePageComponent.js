@@ -1,4 +1,5 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import ImageList from '../image-list/ImageListComponent';
 import LoaderBar from '../loader-bar/LoaderBarComponent';
@@ -16,9 +17,6 @@ export default class HomePage extends React.Component {
 			fetching: false,
 			filters: filterService.list(),
 		};
-
-		this._handleFilterRemove = this._handleFilterRemove.bind(this);
-		this._handleFilterAdd = this._handleFilterAdd.bind(this);
 	}
 
 	_consolidateTagsFromFilters (filters) {
@@ -36,6 +34,7 @@ export default class HomePage extends React.Component {
 			});
 	}
 
+	@autobind
 	_handleFilterRemove (itemId) {
 		const filters = this._cancelAppliedFilterFromFiltersById(itemId, this.state.filters);
 		const appliedFilters = this._filterAppliedFilters(filters);
@@ -55,6 +54,7 @@ export default class HomePage extends React.Component {
 		}
 	}
 
+	@autobind
 	_handleFilterAdd (itemId) {
 		const filters = this._applyFilterInFiltersById(itemId, this.state.filters);
 		const appliedFilters = this._filterAppliedFilters(filters);

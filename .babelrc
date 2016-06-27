@@ -1,13 +1,7 @@
 {
   "presets": [ "es2015", "stage-0", "react" ],
   "plugins": [
-    [ "react-transform", {
-      "transforms": [{
-        "transform": "react-transform-hmr",
-        "imports": ["react"],
-        "locals": ["module"]
-      }]
-    }],
-    "transform-runtime"
+    "transform-runtime",
+    "babel-plugin-transform-decorators-legacy"
   ]
 }

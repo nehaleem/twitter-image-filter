@@ -8,7 +8,6 @@ module.exports = {
 	context: path.resolve(__dirname, 'src'),
 	entry: {
 		app: [
-			'webpack-hot-middleware/client?reload=true',
 			'app.js',
 		],
 		vendor: Object.keys(dependencies).filter((dep) => dep !== 'twitter'), // Dont want nodejs module inside bundle
@@ -31,11 +30,6 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'react-hot',
-			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -62,7 +56,6 @@ module.exports = {
 			jQuery: 'jquery/src/jquery',
 		}),
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
-		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({ template: 'index.template.html', inject: 'body' }),
 	],
 };

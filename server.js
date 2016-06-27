@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const config = require('./webpack.config.babel.js');
 const express = require('express');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const PORT = 8081;
 
@@ -26,7 +25,6 @@ const webpackMiddleware = webpackDevMiddleware(compiler, {
 });
 
 app.use(webpackMiddleware);
-app.use(webpackHotMiddleware(compiler));
 
 const Twitter = require('twitter');
 const client = new Twitter({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import './index.css';
 
@@ -6,14 +7,7 @@ export default class FilterForm extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this._handleFilterSave = this._handleFilterSave.bind(this);
-		this._handleFilterDelete = this._handleFilterDelete.bind(this);
-		this._handleNameInputChange = this._handleNameInputChange.bind(this);
-		this._handleFormErase = this._handleFormErase.bind(this);
-		this._handleTagsInputChange = this._handleTagsInputChange.bind(this);
-
 		this._nameNode = null;
-
 		this.state = {
 			id: null,
 			name: '',
@@ -39,28 +33,33 @@ export default class FilterForm extends React.Component {
 		}
 	}
 
+	@autobind
 	_handleFilterSave () {
 		const { id, name, tags } = this.state;
 
 		this.props.onSave(id, name, tags);
 	}
 
+	@autobind
 	_handleFilterDelete () {
 		this.props.onDelete(this.state.id);
 	}
 
+	@autobind
 	_handleNameInputChange (event) {
 		const name = event.target.value;
 
 		this.setState({ name });
 	}
 
+	@autobind
 	_handleTagsInputChange (event) {
 		const tags = event.target.value.split(',');
 
 		this.setState({ tags });
 	}
 
+	@autobind
 	_handleFormErase () {
 		this.setState({
 			id: null,

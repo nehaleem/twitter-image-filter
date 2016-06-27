@@ -1,19 +1,15 @@
 import React from 'react';
+import { autobind } from 'core-decorators';
 
 import './index.css';
 
 export default class FilterListComponent extends React.Component {
-	constructor (props) {
-		super(props);
-
-		this._handleFilterItemClick = this._handleFilterItemClick.bind(this);
-	}
-
 	static propTypes = {
 		items: React.PropTypes.array.isRequired,
 		onFilterItemClick: React.PropTypes.func.isRequired,
 	};
 
+	@autobind
 	_handleFilterItemClick (event) {
 		const itemId = Number.parseInt(event.target.getAttribute('data-filter-id'), 10);
 
