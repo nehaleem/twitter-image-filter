@@ -10,13 +10,19 @@ export default class HomePage extends React.Component {
 	componentWillMount () {
 		this.props.listFilters();
 	}
+	_consolidateTagsFromFilters (filters) {
+		const tags = filters
+			.reduce((map, filter) => map.concat(filter.tags), []);
+
+		return [ ...new Set(tags) ];
+	}
 
 	_getItemsContent () {
-		if (this.props.fetching) {
+		if (this.props.isFetching) {
 			return <LoaderBar />;
 		}
-		else if (this.props.items.length) {
-			return <ImageList items={this.props.items} />;
+		else if (this.props.tweets.length) {
+			return <ImageList items={this.props.tweets} />;
 		}
 		else {
 			return 'No tweets found, or no filter defined. Jeesus :(';

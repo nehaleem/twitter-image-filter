@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
 import Menu from './menu/MenuComponent';
-import HomePageContainer from './images/HomePageContainer';
+import HomePageContainer from 'tweets/HomePageContainer';
 import FiltersPage from './filters/FiltersPageComponent';
 import store from './store';
 

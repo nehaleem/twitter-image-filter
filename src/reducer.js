@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import imagePage from './images/reducer';
+import filters from './filters/reducer';
+import tweets from './tweets/reducer';
 
 const mainReducer = combineReducers({
-	imagePage,
+	filters,
+	tweets,
 });
 
 export default mainReducer;

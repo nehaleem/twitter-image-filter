@@ -1,10 +1,6 @@
 import { Action } from './actions';
 
-const initialState = {
-	items: [],
-	fetching: false,
-	filters: [],
-};
+const initialState = [];
 
 function updateFilterAppliedStateOnId (filter, id, applied) {
 	if (filter.id === id) {
@@ -15,36 +11,21 @@ function updateFilterAppliedStateOnId (filter, id, applied) {
 	}
 }
 
-const reducer = (state = initialState, action) => {
+const filters = (state = initialState, action) => {
 	let filters = null;
 
 	switch (action.type) {
 		case Action.ADD:
-			filters = state.filters
+			return state
 				.map((filter) => updateFilterAppliedStateOnId(filter, action.id, true));
-			return {
-				...state,
-				filters,
-				fetching: true,
-			};
 		case Action.REMOVE:
-			filters = state.filters
+			return state
 				.map((filter) => updateFilterAppliedStateOnId(filter, action.id, false));
-			const appliedFilters = filters.filter((filter) => filter.applied);
-
-			return {
-				...state,
-				filters,
-				fetching: appliedFilters.length > 0,
-			};
 		case Action.LIST_FILTERS:
-			return {
-				...state,
-				filters: action.filters,
-			};
+			return action.filters;
 		default:
 			return state;
 	}
 };
 
-export default reducer;
+export default filters;

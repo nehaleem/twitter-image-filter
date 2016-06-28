@@ -1,9 +1,9 @@
 import * as filterService from '../filters/service';
 
 export const Action = {
-	ADD: Symbol(),
-	REMOVE: Symbol(),
-	LIST_FILTERS: Symbol(),
+	ADD: 'FILTER_ADD',
+	REMOVE: 'FILTER_REMOVE',
+	LIST_FILTERS: 'FILTER_LIST',
 };
 
 export const addFilter = (id) => {
