@@ -7,7 +7,7 @@ import * as tweetActions from './actions';
 import * as filterActions from '../filters/actions';
 
 const mapStateToProps = (state) => {
-	const { filters } = state;
+	const { filters } = state.filters;
 	const { isFetching, tweets, error } = state.tweets;
 
 	return {

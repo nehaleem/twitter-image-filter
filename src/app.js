@@ -9,7 +9,7 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import Menu from './menu/MenuComponent';
 import HomePageContainer from 'tweets/HomePageContainer';
-import FiltersPage from './filters/FiltersPageComponent';
+import FiltersPageContainer from './filters/FiltersPageContainer';
 import store from './store';
 
 const App = (props) => (
@@ -35,7 +35,7 @@ class AppRouter extends React.Component {
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
 					<Route path="home" component={HomePageContainer}/>
-					<Route path="filters" component={FiltersPage} />
+					<Route path="filters" component={FiltersPageContainer} />
 					<Route path="*" component={() => <div>Page not found</div>}/>
 				</Route>
 			</Router>

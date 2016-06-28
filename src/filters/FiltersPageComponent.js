@@ -6,61 +6,40 @@ import FilterForm from '../filter-form/FilterFormComponent';
 import FilterList from '../filter-list/FilterListComponent';
 
 export default class FiltersPage extends React.Component {
-	constructor (props) {
-		super(props);
+	componentWillMount () {
+		this.props.listFilters();
+	}
 
-		this.state = {
-			filters: filterService.list(),
-			editedFilter: null,
-		};
+	componentWillUpdate (nextProps) {
+		if (nextProps.filters !== this.props.filters) {
+			this.props.persistFilters(nextProps.filters);
+		}
+	}
+
+	componentWillUnmount () {
+		this.props.deselectFilter();
 	}
 
 	@autobind
-	_deleteFilter (itemId) {
-		const filters = this.state.filters.slice();
-		const filterIndex = filters.findIndex((filter) => filter.id === itemId);
-
-		filters.splice(filterIndex, 1);
-
-		this.setState({ filters, editedFilter: null });
-		filterService.save(filters);
+	_deleteFilter (id) {
+		this.props.deleteFilter(id);
 	}
 
 	@autobind
 	_handleUpdateFilter (itemId, name, tags) {
 		if (itemId === null) {
-			this._addFilter(name, tags);
+			const id = this._resolveLastFilterId(this.props.filters);
+
+			this.props.createFilter(id, name, tags);
 		}
 		else {
-			this._editFilter(itemId, name, tags);
+			this.props.updateFilter(itemId, name, tags);
 		}
 	}
 
 	@autobind
-	_handleFilterClick (itemId) {
-		const filter = this.state.filters
-			.find((filter) => filter.id === itemId);
-
-		this.setState({ editedFilter: filter });
-	}
-
-	_editFilter (itemId, name, tags) {
-		const updatedFilter = {
-			id: itemId,
-			name,
-			tags,
-		};
-		const filters = this.state.filters
-			.map((filter) => {
-				if (filter.id === itemId) {
-					filter = updatedFilter;
-				}
-
-				return filter;
-			});
-
-		this.setState({ filters, editedFilter: updatedFilter });
-		filterService.save(filters);
+	_handleFilterClick (id) {
+		this.props.selectFilter(id);
 	}
 
 	_sortFilterById (filterA, filterB) {
@@ -75,26 +54,17 @@ export default class FiltersPage extends React.Component {
 		}
 	}
 
-	_addFilter (name, tags) {
+	_resolveLastFilterId (filters) {
 		let lastFilterIndex = 0;
 
-		if (this.state.filters.length) {
-			const sortedFilters = this.state.filters.sort((this._sortFilterById));
+		if (filters.length) {
+			const sortedFilters = filters.sort((this._sortFilterById));
 			const lastFilter = sortedFilters[sortedFilters.length - 1];
 
 			lastFilterIndex = lastFilter.id + 1;
 		}
 
-		const filter = {
-			id: lastFilterIndex,
-			name,
-			tags,
-		};
-
-		const filters = this.state.filters.concat([ filter ]);
-
-		this.setState({ filters, editedFilter: filter });
-		filterService.save(filters);
+		return lastFilterIndex;
 	}
 
 	render () {
@@ -111,7 +81,7 @@ export default class FiltersPage extends React.Component {
 						<h4>Your filters</h4>
 						<FilterList
 							onFilterItemClick={this._handleFilterClick}
-							items={this.state.filters}
+							items={this.props.filters}
 						/>
 					</div>
 
@@ -119,7 +89,7 @@ export default class FiltersPage extends React.Component {
 						<h4>Filter edit</h4>
 						<div className="items-block filter-form">
 							<FilterForm
-								filter={this.state.editedFilter}
+								filter={this.props.editingFilter}
 								onDelete={this._deleteFilter}
 								onSave={this._handleUpdateFilter}
 							/>
