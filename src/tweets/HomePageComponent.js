@@ -10,11 +10,29 @@ export default class HomePage extends React.Component {
 	componentWillMount () {
 		this.props.listFilters();
 	}
-	_consolidateTagsFromFilters (filters) {
-		const tags = filters
+
+	componentWillReceiveProps (nextProps) {
+		if (this.props.filters !== nextProps.filters) {
+			if (nextProps.filters.length) {
+				const { applied: appliedFilters } = this._groupFiltersByAppliedState(nextProps.filters);
+
+				if (appliedFilters.length) {
+					const keywords = this._consolidateKeywordsFromFilters(appliedFilters);
+
+					this.props.fetchTweetsByKeywords(keywords);
+				}
+				else {
+					this.props.clearTweets();
+				}
+			}
+		}
+	}
+
+	_consolidateKeywordsFromFilters (filters) {
+		const keywords = filters
 			.reduce((map, filter) => map.concat(filter.tags), []);
 
-		return [ ...new Set(tags) ];
+		return [ ...new Set(keywords) ];
 	}
 
 	_getItemsContent () {

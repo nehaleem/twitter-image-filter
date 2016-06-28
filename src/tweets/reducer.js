@@ -27,6 +27,11 @@ const tweets = (state = initialState, action) => {
 				isFetching: false,
 				error: action.error,
 			};
+		case Action.CLEAR:
+			return {
+				...state,
+				tweets: [],
+			};
 		default:
 			return state;
 	}

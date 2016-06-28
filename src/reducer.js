@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 import filters from './filters/reducer';
 import tweets from './tweets/reducer';
