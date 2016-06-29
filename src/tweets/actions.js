@@ -7,15 +7,9 @@ export const Action = {
 	CLEAR: 'TWEETS_CLEAR',
 };
 
-export const requestTweets = () => {
-	return {
-		type: Action.FETCH
-	};
-};
-
 export const clearTweets = () => {
 	return {
-		type: Action.CLEAR
+		type: Action.CLEAR,
 	};
 };
 
@@ -34,7 +28,9 @@ export const receiveTweetsFailed = (error) => {
 }
 
 export const fetchTweetsByKeywords = (keywords) => (dispatch) => {
-	dispatch(requestTweets());
+	dispatch({
+		type: Action.FETCH,
+	});
 
 	tweetService
 		.search(keywords)
