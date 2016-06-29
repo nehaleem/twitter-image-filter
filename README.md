@@ -20,7 +20,7 @@ These filters can be used for searching in twitter images feed.
 ## Info
 This repo contains 2 branches:
 * `master` - State without Redux
-* `redux`  - Same app migrated to redux `//TODO`
+* `redux`  - Same app migrated to redux
 
 ##  Start
     $ npm run watch
