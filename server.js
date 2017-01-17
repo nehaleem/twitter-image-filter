@@ -8,13 +8,14 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const PORT = 8081;
+const listenUrl = `http://localhost:${PORT}/`;
 
 const app = express();
 const compiler = webpack(config);
 
 const webpackMiddleware = webpackDevMiddleware(compiler, {
 	publicPath: config.output.publicPath,
-	contentBase: 'http://localhost:8081/',
+	contentBase: listenUrl,
 	stats: {
 		colors: true,
 		hash: false,
@@ -61,5 +62,5 @@ app.listen(PORT, (err) => {
 		return console.log(err);
 	}
 
-	console.log(`Listening at http://localhost:${PORT}/`);
+	console.log(`Listening at ${listenUrl}`);
 });
